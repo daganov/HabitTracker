@@ -150,6 +150,8 @@ struct AddNewHabit: View {
                         }
                     }
                     .tint(.white)
+                    .disabled(!habitModel.doneStatus())
+//                    .opacity(habitModel.doneStatus() ? 1 : 1)
                 }
             }
         }

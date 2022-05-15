@@ -38,4 +38,11 @@ class HabitViewModel: ObservableObject {
         remainderDate   = Date()
 
     }
+    
+    // MARK: Done Button Status
+    func doneStatus() -> Bool {
+        let remainderStatus = isRemainderOn ? remainderText == "" : false
+        
+        return !(title == "" || weekDays.isEmpty || remainderStatus)
+    }
 }
