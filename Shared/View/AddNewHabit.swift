@@ -113,6 +113,11 @@ struct AddNewHabit: View {
                     .padding(.horizontal)
                     .padding(.vertical, 12)
                     .fieldBackground()
+                    .onTapGesture {
+                        withAnimation {
+                            habitModel.showTimePicker.toggle()
+                        }
+                    }
 
                     TextField("Текст напоминания", text: $habitModel.remainderText)
                         .padding(.horizontal)
@@ -142,6 +147,32 @@ struct AddNewHabit: View {
                         
                     }
                     .tint(.white)
+                }
+            }
+        }
+        .overlay {
+            if habitModel.showTimePicker {
+                ZStack {
+                    Rectangle()
+                        .fill(.ultraThinMaterial)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation {
+                                habitModel.showTimePicker.toggle()
+                            }
+                        }
+                    
+                    DatePicker.init("",
+                                    selection: $habitModel.remainderDate,
+                                    displayedComponents: [.hourAndMinute])
+                    .datePickerStyle(.wheel)
+                    .labelsHidden()
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color("TFBG"))
+                    }
+                    .padding()
                 }
             }
         }
