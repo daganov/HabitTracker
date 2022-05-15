@@ -41,6 +41,25 @@ struct AddNewHabit: View {
                     }
                 }
                 .padding(.vertical)
+                
+                Divider()
+                
+                // MARK: Frequency Selection
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Повторение")
+                        .font(.callout.bold())
+                    let weekDays = Calendar.current.weekdaySymbols ?? []
+                    
+                    HStack(spacing: 10) {
+                        ForEach(weekDays, id: \.self) { day in
+                            // MARK: Limiting to first 2 letters
+                            Text(day.prefix(2))
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                        }
+                    }
+                }
             }
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
