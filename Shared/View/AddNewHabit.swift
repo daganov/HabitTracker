@@ -11,6 +11,15 @@ struct AddNewHabit: View {
     
     @EnvironmentObject var habitModel: HabitViewModel
     
+    let weekDays: [String] = {
+        var calendar = Calendar.current //Calendar(identifier: .gregorian)
+        calendar.locale = .init(identifier: "ru")
+        var weekdays = calendar.shortWeekdaySymbols
+        weekdays.append(weekdays.removeFirst())
+        return weekdays
+    }()
+
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 15) {
@@ -48,17 +57,33 @@ struct AddNewHabit: View {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Повторение")
                         .font(.callout.bold())
-                    let weekDays = Calendar.current.weekdaySymbols ?? []
-                    
+                                        
                     HStack(spacing: 10) {
                         ForEach(weekDays, id: \.self) { day in
+                            let index = habitModel.weekDays.firstIndex { value in
+                                value == day
+                            } ?? -1
                             // MARK: Limiting to first 2 letters
-                            Text(day.prefix(2))
+                            Text(day)
                                 .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 12)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .fill(index != -1 ? Color(habitModel.habitColor) : Color("TFBG").opacity(0.4))
+                                }
+                                .onTapGesture {
+                                    withAnimation {
+                                        if index != -1 {
+                                            habitModel.weekDays.remove(at: index)
+                                        } else {
+                                            habitModel.weekDays.append(day)
+                                        }
+                                    }
+                                }
                         }
                     }
+                    .padding(.top, 15)
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)
