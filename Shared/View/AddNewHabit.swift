@@ -85,6 +85,24 @@ struct AddNewHabit: View {
                     }
                     .padding(.top, 15)
                 }
+                
+                Divider()
+                    .padding(.vertical, 10)
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Напоминание")
+                            .fontWeight(.semibold)
+                        
+                        Text("Просто напоминалка")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Toggle(isOn: $habitModel.isRemainderOn) {}
+                        .labelsHidden()
+                }
             }
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
