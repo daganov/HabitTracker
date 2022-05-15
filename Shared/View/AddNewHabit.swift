@@ -26,7 +26,7 @@ struct AddNewHabit: View {
                 TextField("Заголовок", text: $habitModel.title)
                     .padding(.horizontal)
                     .padding(.vertical, 10)
-                    .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    .fieldBackground()
                 
                 // MARK: Habit Color Picker
                 HStack(spacing: 0) {
@@ -112,12 +112,12 @@ struct AddNewHabit: View {
                     }
                     .padding(.horizontal)
                     .padding(.vertical, 12)
-                    .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    .fieldBackground()
 
                     TextField("Текст напоминания", text: $habitModel.remainderText)
                         .padding(.horizontal)
                         .padding(.vertical, 10)
-                        .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                        .fieldBackground()
                 }
                 .frame(height: habitModel.isRemainderOn ? nil : 0)
                 .opacity(habitModel.isRemainderOn ? 1 : 0)
@@ -145,6 +145,19 @@ struct AddNewHabit: View {
                 }
             }
         }
+    }
+}
+
+struct FieldBackground: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+    }
+}
+
+extension View {
+    func fieldBackground() -> some View {
+        modifier(FieldBackground())
     }
 }
 
