@@ -136,6 +136,12 @@ struct Home: View {
         .padding(.vertical)
         .padding(.horizontal, 6)
         .fieldBackground()
+        .onTapGesture {
+            // MARK: Editing Habit
+            habitModel.editHabit = habit
+            habitModel.restoreEditData()
+            habitModel.addNewHabit.toggle()
+        }
     }
     
     // MARK: Formatting Date
