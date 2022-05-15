@@ -94,7 +94,7 @@ struct AddNewHabit: View {
                         Text("Напоминание")
                             .fontWeight(.semibold)
                         
-                        Text("Просто напоминалка")
+                        Text("Просто уведомление")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -103,7 +103,26 @@ struct AddNewHabit: View {
                     Toggle(isOn: $habitModel.isRemainderOn) {}
                         .labelsHidden()
                 }
+                
+                HStack(spacing: 12) {
+                    Label {
+                        Text(habitModel.remainderDate.formatted(date: .omitted, time: .shortened))
+                    } icon: {
+                        Image(systemName: "clock")
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 12)
+                    .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+
+                    TextField("Текст напоминания", text: $habitModel.remainderText)
+                        .padding(.horizontal)
+                        .padding(.vertical, 10)
+                        .background(Color("TFBG").opacity(0.4), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                }
+                .frame(height: habitModel.isRemainderOn ? nil : 0)
+                .opacity(habitModel.isRemainderOn ? 1 : 0)
             }
+            .animation(.easeInOut, value: habitModel.isRemainderOn)
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
             .navigationBarTitleDisplayMode(.inline)
