@@ -16,7 +16,7 @@ struct Home: View {
     @StateObject var habitModel = HabitViewModel()
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Text("Привычки")
                 .font(.title2.bold())
                 .frame(maxWidth: .infinity)
@@ -33,9 +33,9 @@ struct Home: View {
             // Установка кнопки добавления посередине, если привычек ещё нет
             ScrollView(habits.isEmpty ? .init() : .vertical, showsIndicators: false) {
                 VStack(spacing: 15) {
-                    // MARK: Add Habiit Button
+                    // MARK: Add Habit Button
                     Button {
-                        
+                        habitModel.addNewHabit.toggle()
                     } label: {
                         Label {
                             Text("Новая привычка")
@@ -54,7 +54,11 @@ struct Home: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .padding()
         .sheet(isPresented: $habitModel.addNewHabit) {
-            
+            // MARK: Erasing All Existing Content
+            habitModel.resetData()
+        } content: {
+            AddNewHabit()
+                .environmentObject(habitModel)
         }
     }
 }

@@ -19,6 +19,7 @@ struct AddNewHabit: View {
         return weekdays
     }()
 
+    @Environment(\.self) var env
     
     var body: some View {
         NavigationView {
@@ -135,7 +136,7 @@ struct AddNewHabit: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        
+                        env.dismiss()
                     } label: {
                         Image(systemName: "xmark.circle")
                     }
@@ -144,7 +145,9 @@ struct AddNewHabit: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Добавить") {
-                        
+                        if habitModel.addHabit(context: env.managedObjectContext) {
+                            env.dismiss()
+                        }
                     }
                     .tint(.white)
                 }
