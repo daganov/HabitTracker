@@ -22,4 +22,20 @@ class HabitViewModel: ObservableObject {
     
     // MARK: Remainder Time Picker
     @Published var showTimePicker: Bool     = false
+    
+    // MARK: Adding Habit to Database
+    func addHabit(context: NSManagedObjectContext) -> Bool {
+        false
+    }
+    
+    // MARK: Erasing Data
+    func resetData() {
+        title           = ""
+        habitColor      = "Card-1"
+        weekDays        = []
+        isRemainderOn   = false
+        remainderText   = ""
+        remainderDate   = Date()
+
+    }
 }
