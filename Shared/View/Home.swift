@@ -13,6 +13,8 @@ struct Home: View {
                   sortDescriptors: [NSSortDescriptor(keyPath: \Habit.dateAdded, ascending: false)],
                   predicate: nil, animation: .easeInOut) var habits: FetchedResults<Habit>
     
+    @StateObject var habitModel = HabitViewModel()
+    
     var body: some View {
         VStack {
             Text("Привычки")
@@ -20,7 +22,7 @@ struct Home: View {
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .trailing) {
                     Button {
-                        
+                        habitModel.addNewHabit.toggle()
                     } label: {
                         Image(systemName: "gearshape")
                             .font(.title3)
@@ -51,6 +53,9 @@ struct Home: View {
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .padding()
+        .sheet(isPresented: $habitModel.addNewHabit) {
+            
+        }
     }
 }
 
