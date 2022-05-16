@@ -56,14 +56,12 @@ struct AddNewHabit: View {
                 
                 // MARK: Frequency Selection
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Повторение")
+                    Text("Повторения")
                         .font(.callout.bold())
                                         
                     HStack(spacing: 10) {
                         ForEach(weekDays, id: \.self) { day in
-                            let index = habitModel.weekDays.firstIndex { value in
-                                value == day
-                            } ?? -1
+                            let index = habitModel.weekDays.firstIndex(of: day) ?? -1
                             // MARK: Limiting to first 2 letters
                             Text(day)
                                 .fontWeight(.semibold)
@@ -169,7 +167,6 @@ struct AddNewHabit: View {
                     }
                     .tint(.white)
                     .disabled(!habitModel.doneStatus())
-//                    .opacity(habitModel.doneStatus() ? 1 : 1)
                 }
             }
         }
