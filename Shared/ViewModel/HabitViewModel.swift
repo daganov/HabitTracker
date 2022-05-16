@@ -27,9 +27,32 @@ class HabitViewModel: ObservableObject {
     // MARK: Editing Habit
     @Published var editHabit: Habit?
     
+    // MARK: Notification Access Status
+    @Published var notificationAccess: Bool = false
+    
+    init() {
+        requestNotificationAccess()
+    }
+    
+    func requestNotificationAccess() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { status, _ in
+            DispatchQueue.main.async {
+                self.notificationAccess = status
+            }
+        }
+    }
+    
     // MARK: Adding Habit to Database
     func addHabit(context: NSManagedObjectContext) async -> Bool {
-        let habit = Habit(context: context)
+        // MARK: Editing Data
+        var habit: Habit!
+        if let editHabit = editHabit {
+            habit = editHabit
+            // Removing All Pending Notifications
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: editHabit.notificationIDs ?? [])
+        } else {
+            habit = Habit(context: context)
+        }
         habit.title = title
         habit.color = habitColor
         habit.weekDays = weekDays
@@ -60,6 +83,7 @@ class HabitViewModel: ObservableObject {
     func scheduleNotification() async throws -> [String] {
         let content = UNMutableNotificationContent()
         content.title = "Напоминание о привычке"
+        content.subtitle = remainderText
         content.sound = UNNotificationSound.default
         
         // Scheduled IDs
@@ -114,6 +138,10 @@ class HabitViewModel: ObservableObject {
     // MARK: Deleting Habit From Database
     func deleteHabit(context: NSManagedObjectContext) -> Bool {
         if let editHabit = editHabit {
+            if editHabit.isRemainderOn {
+                // Removing All Pending Notifications
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: editHabit.notificationIDs ?? [])
+            }
             context.delete(editHabit)
             if let _ = try? context.save() {
                 return true

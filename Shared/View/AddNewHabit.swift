@@ -90,6 +90,7 @@ struct AddNewHabit: View {
                 Divider()
                     .padding(.vertical, 10)
                 
+                // Hiding If Notification Access is Rejected
                 HStack {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("Напоминание")
@@ -104,6 +105,7 @@ struct AddNewHabit: View {
                     Toggle(isOn: $habitModel.isRemainderOn) {}
                         .labelsHidden()
                 }
+                .opacity(habitModel.notificationAccess ? 1 : 0)
                 
                 HStack(spacing: 12) {
                     Label {
@@ -127,6 +129,7 @@ struct AddNewHabit: View {
                 }
                 .frame(height: habitModel.isRemainderOn ? nil : 0)
                 .opacity(habitModel.isRemainderOn ? 1 : 0)
+                .opacity(habitModel.notificationAccess ? 1 : 0)
             }
             .animation(.easeInOut, value: habitModel.isRemainderOn)
             .frame(maxHeight: .infinity, alignment: .top)
