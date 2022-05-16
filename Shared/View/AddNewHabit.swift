@@ -160,7 +160,7 @@ struct AddNewHabit: View {
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Добавить") {
+                    Button(habitModel.editHabit != nil ? "Сохранить" : "Добавить") {
                         Task {
                             if await habitModel.addHabit(context: env.managedObjectContext) {
                                 env.dismiss()
