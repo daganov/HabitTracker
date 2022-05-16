@@ -99,12 +99,16 @@ struct Home: View {
                 return cal
             }()
             let currentWeek = calendar.dateInterval(of: .weekOfMonth, for: Date())
-            let symbols = calendar.shortWeekdaySymbols
+            let weekdays: [String] = {
+                var symbols = calendar.shortWeekdaySymbols
+                symbols.append(symbols.removeFirst())
+                return symbols
+            }()
             let startDate = currentWeek?.start ?? Date()
             let activeWeekDays = habit.weekDays ?? []
-            let activePlot = symbols.indices.compactMap { index -> (String, Date) in
+            let activePlot = weekdays.indices.compactMap { index -> (String, Date) in
                 let currentDate = calendar.date(byAdding: .day, value: index, to: startDate)
-                return (symbols[index], currentDate!)
+                return (weekdays[index], currentDate!)
             }
             
             HStack(spacing: 0) {
