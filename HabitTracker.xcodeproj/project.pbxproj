@@ -21,6 +21,9 @@
 		8B62A49B2831494600FCDE53 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62A46D2831494500FCDE53 /* Persistence.swift */; };
 		8B62A49C2831494600FCDE53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B62A46E2831494600FCDE53 /* Assets.xcassets */; };
 		8B62A49D2831494600FCDE53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B62A46E2831494600FCDE53 /* Assets.xcassets */; };
+		8B62A4AF28314AD700FCDE53 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62A4AE28314AD700FCDE53 /* Home.swift */; };
+		8B62A4B128314E3D00FCDE53 /* HabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62A4B028314E3D00FCDE53 /* HabitViewModel.swift */; };
+		8B62A4B32831504700FCDE53 /* AddNewHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62A4B22831504700FCDE53 /* AddNewHabit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		8B62A48C2831494600FCDE53 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B62A4902831494600FCDE53 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		8B62A4922831494600FCDE53 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		8B62A4AE28314AD700FCDE53 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		8B62A4B028314E3D00FCDE53 /* HabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewModel.swift; sourceTree = "<group>"; };
+		8B62A4B22831504700FCDE53 /* AddNewHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewHabit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,8 @@
 		8B62A4682831494500FCDE53 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8B62A4AD28314AAE00FCDE53 /* ViewModel */,
+				8B62A4AC28314AA800FCDE53 /* View */,
 				8B62A46B2831494500FCDE53 /* HabitTrackerApp.swift */,
 				8B62A46C2831494500FCDE53 /* ContentView.swift */,
 				8B62A46D2831494500FCDE53 /* Persistence.swift */,
@@ -147,6 +155,23 @@
 				8B62A4922831494600FCDE53 /* Tests_macOSLaunchTests.swift */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		8B62A4AC28314AA800FCDE53 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B62A4AE28314AD700FCDE53 /* Home.swift */,
+				8B62A4B22831504700FCDE53 /* AddNewHabit.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8B62A4AD28314AAE00FCDE53 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8B62A4B028314E3D00FCDE53 /* HabitViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +334,9 @@
 			files = (
 				8B62A4942831494600FCDE53 /* HabitTracker.xcdatamodeld in Sources */,
 				8B62A49A2831494600FCDE53 /* Persistence.swift in Sources */,
+				8B62A4AF28314AD700FCDE53 /* Home.swift in Sources */,
+				8B62A4B32831504700FCDE53 /* AddNewHabit.swift in Sources */,
+				8B62A4B128314E3D00FCDE53 /* HabitViewModel.swift in Sources */,
 				8B62A4962831494600FCDE53 /* HabitTrackerApp.swift in Sources */,
 				8B62A4982831494600FCDE53 /* ContentView.swift in Sources */,
 			);
