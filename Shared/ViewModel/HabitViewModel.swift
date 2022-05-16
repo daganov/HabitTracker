@@ -108,7 +108,18 @@ class HabitViewModel: ObservableObject {
         isRemainderOn   = false
         remainderText   = ""
         remainderDate   = Date()
-
+        editHabit = nil
+    }
+    
+    // MARK: Deleting Habit From Database
+    func deleteHabit(context: NSManagedObjectContext) -> Bool {
+        if let editHabit = editHabit {
+            context.delete(editHabit)
+            if let _ = try? context.save() {
+                return true
+            }
+        }
+        return false
     }
     
     // MARK: Restoring Edit Data
